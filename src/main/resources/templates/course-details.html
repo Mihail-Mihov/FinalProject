@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head >
+    <meta charset="utf-8">
+    <title>Course Details Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<header th:replace="fragments/commons::navigation"></header>
+
+<input type="hidden" name="courseId" id="courseId" th:value="${offer.id}">
+
+<div class="container bootdey" th:object="${offer}">
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="pro-img-details">
+                        <img th:src="*{imageUrl}" alt="">
+                    </div>
+                    <div class="pro-img-list">
+                        <a href="#">
+                            <img src="https://via.placeholder.com/115x100/87CEFA/000000" alt="">
+                        </a>
+                        <a href="#">
+                            <img src="https://via.placeholder.com/115x100/FF7F50/000000" alt="">
+                        </a>
+                        <a href="#">
+                            <img src="https://via.placeholder.com/115x100/20B2AA/000000" alt="">
+                        </a>
+                        <a href="#">
+                            <img src="https://via.placeholder.com/120x100/20B2AA/000000" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <ins>  <h3 th:text="*{name}" class="font-weight-bold pro-d-title">
+                        <a href="#" class="">
+                          Leopard Shirt Dress
+                        </a>
+                    </h3> </ins>
+                    <p th:text="*{description}">
+                        Praesent ac condimentum felis. Nulla at nisl orci, at dignissim dolor, The best product descriptions address your ideal buyer directly and personally. The best product descriptions address your ideal buyer directly and personally.
+                    </p>
+                    <div class="product_meta">
+                        <span class="posted_in"> <strong>Categories:</strong> </span><small class="text-danger"  th:text="*{category}" rel="tag" href="#" >T-shirt</small>
+
+                    </div>
+                    <div class="product_meta">
+                        <span class="posted_in"> <strong>Address:</strong> </span><small class="text-danger"  th:text="*{category}" rel="tag" href="#" >T-shirt</small>
+
+                    </div>
+                    <div class="m-bot15"> <strong>Price : </strong> <span th:text="*{price + 50  + 'лв'}" class="amount-old">$544</span>  <span th:text="*{price + 'лв'}" class="pro-price"> $300.00</span></div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="quantiy" placeholder="1" class="form-control quantity">
+                    </div>
+                    <p>
+                        <button class="btn btn-round btn-danger" type="button"><i class="fa fa-shopping-cart"></i> Concact Seller</button>
+
+
+                    <form th:if="*{canDelete}" th:action="@{/courses/{id}(id=*{id})}" th:method="delete">
+                        <input type="submit" class="btn btn-round btn-danger fa fa-shopping-cart" value="Delete"/>
+                    </form>
+
+                    <a th:if="*{canDelete}" class="btn btn-round btn-danger fa fa-shopping-cart"
+                        th:href="@{/courses/{id}/edit(id=*{id})}">Update</a>
+
+<!--                    <form th:if="*{canDelete}" th:href="@{/courses/{id}/edit(id=*{id})}">-->
+<!--                        <input type="submit" class="btn btn-round btn-danger fa fa-shopping-cart" value="Edit"/>-->
+<!--                    </form>-->
+
+<!--                    <button th:if="*{canDelete}" class="btn btn-round btn-danger" type="button">-->
+<!--                        <i class="fa fa-shopping-cart"></i> Edit</button>-->
+
+
+
+                    </p>
+                </div>
+
+
+
+                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+                <section class="content-item" id="comments">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+
+                                <form>
+                                    <h3 class="pull-left">New Comment</h3>
+                                    <button type="submit" class="btn btn-normal pull-right">Submit</button>
+                                    <fieldset>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-lg-2 hidden-xs">
+                                                <img class="img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                            </div>
+                                            <div class="form-group col-xs-12 col-sm-9 col-lg-10">
+                                                <textarea class="form-control" id="message" placeholder="Your message" required=""></textarea>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+
+                                <h3>4 Comments</h3>
+
+
+
+                                <div>
+
+                                    <span id="commentCtnr"><!-- Comments section, filled in by script --></span>
+                                </div>
+
+
+                                <!-- COMMENT 1 - START -->
+                                <div class="media">
+                                    <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">John Doe</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        <ul class="list-unstyled list-inline media-detail pull-left">
+                                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
+                                            <li><i class="fa fa-thumbs-up"></i>13</li>
+                                        </ul>
+                                        <ul class="list-unstyled list-inline media-detail pull-right">
+                                            <li class=""><a href="">Like</a></li>
+                                            <li class=""><a href="">Reply</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- COMMENT 1 - END -->
+
+                                <!-- COMMENT 2 - START -->
+                                <div class="media">
+                                    <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt=""></a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">John Doe</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        <ul class="list-unstyled list-inline media-detail pull-left">
+                                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
+                                            <li><i class="fa fa-thumbs-up"></i>13</li>
+                                        </ul>
+                                        <ul class="list-unstyled list-inline media-detail pull-right">
+                                            <li class=""><a href="">Like</a></li>
+                                            <li class=""><a href="">Reply</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- COMMENT 2 - END -->
+
+                                <!-- COMMENT 3 - START -->
+                                <div class="media">
+                                    <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">John Doe</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        <ul class="list-unstyled list-inline media-detail pull-left">
+                                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
+                                            <li><i class="fa fa-thumbs-up"></i>13</li>
+                                        </ul>
+                                        <ul class="list-unstyled list-inline media-detail pull-right">
+                                            <li class=""><a href="">Like</a></li>
+                                            <li class=""><a href="">Reply</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- COMMENT 3 - END -->
+
+                                <!-- COMMENT 4 - START -->
+                                <div class="media">
+                                    <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt=""></a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">John Doe</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        <ul class="list-unstyled list-inline media-detail pull-left">
+                                            <li><i class="fa fa-calendar"></i>27/02/2014</li>
+                                            <li><i class="fa fa-thumbs-up"></i>13</li>
+                                        </ul>
+                                        <ul class="list-unstyled list-inline media-detail pull-right">
+                                            <li class=""><a href="">Like</a></li>
+                                            <li class=""><a href="">Reply</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- COMMENT 4 - END -->
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </section>
+
+        <script th:src="@{/scripts/myscript.js}"></script>
+
+    </div>
+</div>
+
+<style type="text/css">
+    body{margin-top:20px;
+        background:#eee;
+    }
+
+
+    .content-item {
+        padding:30px 0;
+        background-color:#FFFFFF;
+    }
+
+    .content-item.grey {
+        background-color:#F0F0F0;
+        padding:50px 0;
+        height:100%;
+    }
+
+    .content-item h2 {
+        font-weight:700;
+        font-size:35px;
+        line-height:45px;
+        text-transform:uppercase;
+        margin:20px 0;
+    }
+
+    .content-item h3 {
+        font-weight:400;
+        font-size:20px;
+        color:#555555;
+        margin:10px 0 15px;
+        padding:0;
+    }
+
+    .content-headline {
+        height:1px;
+        text-align:center;
+        margin:20px 0 70px;
+    }
+
+    .content-headline h2 {
+        background-color:#FFFFFF;
+        display:inline-block;
+        margin:-20px auto 0;
+        padding:0 20px;
+    }
+
+    .grey .content-headline h2 {
+        background-color:#F0F0F0;
+    }
+
+    .content-headline h3 {
+        font-size:14px;
+        color:#AAAAAA;
+        display:block;
+    }
+
+
+    #comments {
+        box-shadow: 0 -1px 6px 1px rgba(0,0,0,0.1);
+        background-color:#FFFFFF;
+    }
+
+    #comments form {
+        margin-bottom:30px;
+    }
+
+    #comments .btn {
+        margin-top:7px;
+    }
+
+    #comments form fieldset {
+        clear:both;
+    }
+
+    #comments form textarea {
+        height:100px;
+    }
+
+    #comments .media {
+        border-top:1px dashed #DDDDDD;
+        padding:20px 0;
+        margin:0;
+    }
+
+    #comments .media > .pull-left {
+        margin-right:20px;
+    }
+
+    #comments .media img {
+        max-width:100px;
+    }
+
+    #comments .media h4 {
+        margin:0 0 10px;
+    }
+
+    #comments .media h4 span {
+        font-size:14px;
+        float:right;
+        color:#999999;
+    }
+
+    #comments .media p {
+        margin-bottom:15px;
+        text-align:justify;
+    }
+
+    #comments .media-detail {
+        margin:0;
+    }
+
+    #comments .media-detail li {
+        color:#AAAAAA;
+        font-size:12px;
+        padding-right: 10px;
+        font-weight:600;
+    }
+
+    #comments .media-detail a:hover {
+        text-decoration:underline;
+    }
+
+    #comments .media-detail li:last-child {
+        padding-right:0;
+    }
+
+    #comments .media-detail li i {
+        color:#666666;
+        font-size:15px;
+        margin-right:10px;
+    }
+
+    /*panel*/
+    .panel {
+        border: none;
+        box-shadow: none;
+    }
+
+    .panel-heading {
+        border-color:#eff2f7 ;
+        font-size: 16px;
+        font-weight: 300;
+    }
+
+    .panel-title {
+        color: #2A3542;
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 0;
+        margin-top: 0;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    /*product list*/
+
+    .prod-cat li a{
+        border-bottom: 1px dashed #d9d9d9;
+    }
+
+    .prod-cat li a {
+        color: #3b3b3b;
+    }
+
+    .prod-cat li ul {
+        margin-left: 30px;
+    }
+
+    .prod-cat li ul li a{
+        border-bottom:none;
+    }
+    .prod-cat li ul li a:hover,.prod-cat li ul li a:focus, .prod-cat li ul li.active a , .prod-cat li a:hover,.prod-cat li a:focus, .prod-cat li a.active{
+        background: none;
+        color: #ff7261;
+    }
+
+    .pro-lab{
+        margin-right: 20px;
+        font-weight: normal;
+    }
+
+    .pro-sort {
+        padding-right: 20px;
+        float: left;
+    }
+
+    .pro-page-list {
+        margin: 5px 0 0 0;
+    }
+
+    .product-list img{
+        width: 100%;
+        border-radius: 4px 4px 0 0;
+        -webkit-border-radius: 4px 4px 0 0;
+    }
+
+    .product-list .pro-img-box {
+        position: relative;
+    }
+    .adtocart {
+        background: #fc5959;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        color: #fff;
+        display: inline-block;
+        text-align: center;
+        border: 3px solid #fff;
+        left: 45%;
+        bottom: -25px;
+        position: absolute;
+    }
+
+    .adtocart i{
+        color: #fff;
+        font-size: 25px;
+        line-height: 42px;
+    }
+
+    .pro-title {
+        color: #5A5A5A;
+        display: inline-block;
+        margin-top: 20px;
+        font-size: 16px;
+    }
+
+    .product-list .price {
+        color:#fc5959 ;
+        font-size: 15px;
+    }
+
+    .pro-img-details {
+        margin-left: -15px;
+    }
+
+    .pro-img-details img {
+        width: 100%;
+    }
+
+    .pro-d-title {
+        font-size: 16px;
+        margin-top: 0;
+    }
+
+    .product_meta {
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        padding: 10px 0;
+        margin: 15px 0;
+    }
+
+    .product_meta span {
+        display: block;
+        margin-bottom: 10px;
+    }
+    .product_meta a, .pro-price{
+        color:#fc5959 ;
+    }
+
+    .pro-price, .amount-old {
+        font-size: 18px;
+        padding: 0 10px;
+    }
+
+    .amount-old {
+        text-decoration: line-through;
+    }
+
+    .quantity {
+        width: 120px;
+    }
+
+    .pro-img-list {
+        margin: 10px 0 0 -15px;
+        width: 100%;
+        display: inline-block;
+    }
+
+    .pro-img-list a {
+        float: left;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    .pro-d-head {
+        font-size: 18px;
+        font-weight: 300;
+    }
+
+</style>
+
+<script type="text/javascript">
+
+</script>
+
+<div style="text-align: center;"><footer class="container" th:replace="fragments/commons::footer"></footer></div>
+</body>
+</html>

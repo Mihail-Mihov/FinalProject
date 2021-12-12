@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body class="bg-secondary">
+<header th:replace="fragments/commons::navigation"></header>
+<main role="main" class="bg-secondary">
+
+
+    <body class="main-bg">
+    <div style="text-align: center;">
+
+
+        <div  class="container">
+            <div class="row height d-flex justify-content-center align-items-center">
+                <div class="col-md-8">
+                    <div class="search"> <i class="fa fa-search"></i>
+                        <input id="searchBar" type="text" class="form-control" placeholder="What are you searching for?">
+                        <button th:onclick="return search()" class="btn btn-primary">Search</button> </div>
+                </div>
+            </div>
+        </div>
+
+<!--        <form th:action="@{/courses/all}" method="get">-->
+<!--            <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >-->
+<!--            <button type="submit" class="btn btn-info" >Search</button>-->
+<!--            <button type="submit" class="btn btn-info" >Reset</button>-->
+<!--        </form>-->
+
+
+        <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
+            <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+
+
+
+                <div th:each="o : ${courses}" th:object="${o}"
+                        class="col-sm-3 p-2">
+                    <div
+                            class="card h-100 shadow-sm"> <img th:src="*{imageUrl}" class="card-img-top" alt="...">
+                        <div th:text="*{name}" class="label-top shadow-sm">Asus Rog</div>
+                        <div class="card-body">
+                            <div class="clearfix mb-3"> <span th:text="*{price + 'лв' }"   class="float-start badge rounded-pill bg-success">
+                                12354.00€</span> <span class="float-end"><a href="#" class="small text-muted" th:text="*{'Category:' + category}" >Reviews</a></span> </div>
+                            <h5 th:text="*{description}"  class="card-title">Loremequi.</h5>
+                            <div class="text-center my-4"> <a th:href="@{/courses/{id}/details(id= *{id})}" class="btn btn-warning">Check offer</a> </div>
+                            <div class="clearfix mb-1"> <span class="float-start"><i class="far fa-question-circle"></i>
+                            </span> <span class="float-end"><i class="fas fa-plus"></i></span> </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <style type="text/css">
+
+
+        .search {
+            position: relative;
+            box-shadow: 0 0 40px rgba(51, 51, 51, .1)
+        }
+
+        .search input {
+            height: 60px;
+            text-indent: 25px;
+            border: 2px solid #d6d4d4
+        }
+
+        .search input:focus {
+            box-shadow: none;
+            border: 2px solid red;
+        }
+
+        .search .fa-search {
+            position: absolute;
+            top: 20px;
+            left: 16px
+        }
+
+        .search button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            height: 50px;
+            width: 110px;
+            background: red
+        }
+
+
+    </style>
+
+
+
+
+    </body>
+
+</main>
+<div style="text-align: center;"><footer class="container" th:replace="fragments/commons::footer"></footer></div>
+
+</body>
+</html>

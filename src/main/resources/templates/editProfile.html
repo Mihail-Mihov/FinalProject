@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head >
+    <meta charset="utf-8">
+    <title>shop product detail - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../scripts/myscript.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ti-icons@0.1.2/css/themify-icons.css">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<header th:replace="fragments/commons::navigation"></header>
+
+
+
+
+<div  class="row ng-scope">
+
+    <div th:object="${profileModel}" class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-body text-center">
+                <div class="pv-lg"><img class="center-block img-responsive img-circle img-thumbnail thumb96" th:src="*{profilePictureUrl}" alt="Contact"></div>
+                <h3 th:text="*{firstName + ' '  + lastName}" class="m0 text-bold"></h3>
+                <div class="mv-lg">
+                    <p th:text="*{description}"></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <div class="h4 text-center">Edit Information</div>
+                <div class="row pv-lg">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+
+                        <form th:object="${profileModel}" th:onsubmit="return check_checkbox()" th:action="@{/profile/edit}"
+                              th:method="patch" class="form-horizontal ng-pristine ng-valid">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="inputContact1">First Name</label>
+                                <div class="col-sm-10">
+                                    <input name="firstName" class="form-control" id="inputContact1" type="text" placeholder="" th:value="*{firstName}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="inputContact2">Last Name</label>
+                                <div class="col-sm-10">
+                                    <input name="lastName" class="form-control" id="inputContact2" type="text" th:value="*{lastName}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="inputContact3">Profile Picture Url</label>
+                                <div class="col-sm-10">
+                                    <input name="profilePictureUrl" class="form-control" id="inputContact7" type="text" th:value="*{profilePictureUrl}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="inputContact3">Phone</label>
+                                <div class="col-sm-10">
+                                    <input name="number" class="form-control" id="inputContact3" type="text" th:value="*{number}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="inputContact4">Email</label>
+                                <div class="col-sm-10">
+                                    <input name="email" class="form-control" id="inputContact4" type="text" th:value="*{email}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="inputContact5">HomeTown</label>
+                                <div class="col-sm-10">
+                                    <input name="homeTown" class="form-control" id="inputContact5" type="text" th:value="*{homeTown}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="inputContact6">Description</label>
+                                <div class="col-sm-10">
+                                    <textarea name="description" class="form-control" id="inputContact6" row="50" th:value="*{description}"></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="terms" type="checkbox" > Are you ready ?
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div  class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button id="submit" class="btn btn-info" type="submit">Update</button>
+                                </div>
+                            </div>
+
+                        </form>
+                        <div class="text-right"><a class="text-muted" href="#">Delete this contact?</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+<style type="text/css">
+    body{
+        margin-top:20px;
+        background:#f5f7fa;
+    }
+    .panel.panel-default {
+        border-top-width: 3px;
+    }
+    .panel {
+        box-shadow: 0 3px 1px -2px rgba(0,0,0,.14),0 2px 2px 0 rgba(0,0,0,.098),0 1px 5px 0 rgba(0,0,0,.084);
+        border: 0;
+        border-radius: 4px;
+        margin-bottom: 16px;
+    }
+    .thumb96 {
+        width: 96px!important;
+        height: 96px!important;
+    }
+    .thumb48 {
+        width: 48px!important;
+        height: 48px!important;
+    }
+
+</style>
+
+
+
+
+<script type="text/javascript">
+
+</script>
+
+<div style="text-align: center;"><footer class="container" th:replace="fragments/commons::footer"></footer></div>
+</body>
+</html>

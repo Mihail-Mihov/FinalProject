@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body class="bg-secondary">
+<header th:replace="fragments/commons::navigation"></header>
+<main role="main" class="bg-secondary">
+
+
+    <body class="main-bg">
+    <div class="login-container text-c animated flipInX">
+        <div>
+            <h1 class="logo-badge text-whitesmoke"><span class="fa fa-user-circle"></span></h1>
+        </div>
+        <h3 class="text-whitesmoke text-center">Register</h3>
+        <div class="container-content">
+
+
+
+            <form th:action="@{/users/register}"
+                  th:method="post"
+                  th:object="${userModel}"
+                    class="margin-t">
+                <div class="form-group">
+                    <input id="username" th:field="*{username}" th:errorclass="is-invalid"
+                           type="text" class="form-control" placeholder="username" required="">
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Username is required and should be between 4 and 20 symbols. Or this username already exists.
+                    </p>
+                </div>
+                <div class="form-group" >
+                    <input id="email" th:field="*{email}" th:errorclass="is-invalid"
+                        type="text" class="form-control" placeholder="email" >
+                        <p class="invalid-feedback errors alert alert-danger">
+                            Email should be valid.
+                        </p>
+                </div>
+                <div class="form-group">
+                    <input id="firstName" th:field="*{firstName}" th:errorclass="is-invalid"
+                            type="text" class="form-control" placeholder="firstName" required="">
+                    <p class="invalid-feedback errors alert alert-danger">
+                        First name is required and should be between 4 and 20 symbols.
+                    </p>
+                </div>
+                <div class="form-group">
+                    <input id="lastName" th:field="*{lastName}" th:errorclass="is-invalid"
+                            type="text" class="form-control" placeholder="lastName" required="">
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Last name is required and should be between 4 and 20 symbols.
+                    </p>
+                </div>
+                <div class="form-group">
+                    <input id="number" th:field="*{number}" th:errorclass="is-invalid"
+                           type="text" class="form-control" placeholder="Phone Number" required="">
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Last name is required and should be between 4 and 20 symbols.
+                    </p>
+                </div>
+                <div class="form-group">
+                    <input id="homeTown" th:field="*{homeTown}" th:errorclass="is-invalid"
+                           type="text" class="form-control" placeholder="HomeTown" required="">
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Last name is required and should be between 4 and 20 symbols.
+                    </p>
+                </div>
+                <div class="form-group">
+                    <input id="password" th:field="*{password}" th:errorclass="is-invalid"
+                            type="password" class="form-control" placeholder="password" required="">
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Password is required and should be between 4 and 20 symbols.
+                    </p>
+                </div>
+                <div class="form-group">
+                    <input id="confirmPassword" th:field="*{confirmPassword}" th:errorclass="is-invalid"
+                            type="password" class="form-control" placeholder="confirmPassword" required="">
+                        <p class="invalid-feedback errors alert alert-danger">
+                            Confirm password doesn't match New password
+                        </p>
+                    </div>
+
+                <button type="submit" class="form-button button-l margin-b">Register</button>
+
+
+                <p class="text-whitesmoke text-center"><small>You already have an account?</small></p>
+                <div style="text-align: center;"> <a class="text-darkyellow"
+                                                     th:href="@{/users/login}"><small>Sign In here</small></a></div>
+            </form>
+
+
+
+            <p class="margin-t text-whitesmoke text-center"><small> SoftUni Project 2021</small> </p>
+        </div>
+    </div>
+    </body>
+
+
+
+
+</main>
+<div style="text-align: center;"><footer class="container" th:replace="fragments/commons::footer"></footer></div>
+
+</body>
+</html>
