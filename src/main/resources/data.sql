@@ -46,38 +46,10 @@ VALUES (4, 1);
 
 
 
--- INSERT INTO comments (`approved`, `created`, `text_content`, `author_id`, `route_id`)
--- VALUES
---     (1, '2021-11-14 08:10:40', X'457874726120636F6F6C20726F75746521', 1, 1),
---     (0, '2021-11-14 08:10:40', X'496E6372656469626C65', 1, 1);
---
+#
+# INSERT INTO pictures(image_url, title, author_id, offer_id)
+# VALUES ();
 
-
-
-#
-# INSERT INTO pictures(image_url, title, author_id, offer_id)
-# VALUES ('http://res.cloudinary.com/ch-cloud/image/upload/v1630581072/d47iy8kxv6qni8euhojk.jpg','Kumata',  1, 1);
-#
-# INSERT INTO pictures(image_url, title, author_id, offer_id)
-# VALUES ('http://res.cloudinary.com/ch-cloud/image/upload/v1630581072/d47iy8kxv6qni8euhojk.jpg', 'Kumata',  1, 1);
-#
-# INSERT INTO pictures(image_url, title, author_id, offer_id)
-# VALUES ( 'http://res.cloudinary.com/ch-cloud/image/upload/v1630581418/tqhjrinmsb69ev7upg0q.jpg', 'Velo Erul', 1, 2);
-#
-# INSERT INTO pictures(image_url, title, author_id, offer_id)
-# VALUES ('http://res.cloudinary.com/ch-cloud/image/upload/v1630582448/oowojgn4lagybkvv20jb.jpg',  'Velo Erul 2', 1, 2);
-#
-# INSERT INTO pictures(image_url, title, author_id, offer_id)
-# VALUES ('http://res.cloudinary.com/ch-cloud/image/upload/v1630582596/tclvroyrkcfbz98yklmc.jpg', 'Aleko',  1, 3);
-#
-# INSERT INTO pictures(image_url, title, author_id, offer_id)
-# VALUES ('http://res.cloudinary.com/ch-cloud/image/upload/v1630582767/ukdmkxyvlnani3hzaafi.jpg', 'Aleko 2',  1, 3);
-#
-# INSERT INTO pictures(image_url, title, author_id, offer_id)
-# VALUES ('http://res.cloudinary.com/ch-cloud/image/upload/v1630583376/en6lxhaddbvhf1ksybbu.jpg', 'Shipka',  1, 4);
-#
-# INSERT INTO pictures(image_url, title, author_id, offer_id)
-# VALUES ('http://res.cloudinary.com/ch-cloud/image/upload/v1630583467/koncyanx4gqwzt9vxgx4.jpg', 'Shipka 2',  1, 4);
 
 INSERT INTO offers  (category, description, image_url, name, price, author_id)
 VALUES (3, 'Because the piano is central to the composition of almost every music genre, learning how to play the piano
