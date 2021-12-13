@@ -4,6 +4,7 @@ import com.example.myproject.model.binding.ProfileUpdateBindingModel;
 import com.example.myproject.model.entity.OfferEntity;
 import com.example.myproject.model.entity.UserEntity;
 import com.example.myproject.model.view.ProfileDetailsView;
+import com.example.myproject.model.view.ProfileHomeView;
 import com.example.myproject.service.OfferService;
 import com.example.myproject.service.UserService;
 import com.example.myproject.service.impl.MyUser;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -37,6 +39,16 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/")
+    public String showProfileHome( Model model) {
+
+        List<ProfileHomeView> allUsers = this.userService.getAllUsers();
+
+        model.addAttribute("allUsers", allUsers);
+
+        return "index";
+    }
+
     @GetMapping("/profile")
     public String showMyProfile( Model model,
                               @AuthenticationPrincipal User currentUser) {
@@ -52,6 +64,7 @@ public class UserController {
         model.addAttribute("offersDetails", allByAuthor);
         return "profile";
     }
+
 
     @PatchMapping("/profile/edit")
     public String editProfile(
@@ -92,26 +105,20 @@ public class UserController {
 
 
 
-//    @GetMapping("/profile/{id}")
-//    public String showProfile(@PathVariable Long id, Model model,
-//                            @AuthenticationPrincipal MyUser currentUser) {
-//
-//        UserDetails principal =  myUserDetailsService.loadUserByUsername(currentUser.getUserIdentifier());
-//
-//        OfferDetailsView offerDetailsView = offerService.findById(id, currentUser.getUserIdentifier());
-//        OfferUpdateBindModel offerModel = modelMapper.map(
-//                offerDetailsView,
-//                OfferUpdateBindModel.class
-//        );
-//        model.addAttribute("offerModel", offerModel);
-//        return "edit";
-//    }
+  @GetMapping("/users/{id}/details")
+  public String showProfile(@PathVariable Long id, Model model) {
+
+      UserEntity byId = userService.findById(id);
+      List<OfferEntity> allByAuthor = offerService.getAllByAuthor(byId.getUsername());
+      ProfileDetailsView profileDetailsView =  modelMapper.map(byId, ProfileDetailsView.class);
+      if (profileDetailsView.getProfilePictureUrl() == null) {
+          profileDetailsView.setProfilePictureUrl("https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg");
+      }
+
+      model.addAttribute("userDetails", profileDetailsView);
+      model.addAttribute("offersDetails", allByAuthor);
+      return "userProfile";
+  }
+
 }
 
-
-//    @PutMapping(value = "/{userId}")
-//    @PreAuthorize("#userId == authentication.principal.userId or hasAuthority('ADMIN')")
-//    public UserAccount updateUserAccount(@PathVariable("userId") int userId,
-//                                         @RequestBody UserAccount userAccount) {
-//        return userAccountService.updateUserAccount(userId, userAccount);
-//    }

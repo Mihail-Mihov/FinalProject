@@ -5,10 +5,12 @@ import com.example.myproject.model.entity.UserEntity;
 import com.example.myproject.model.entity.UserRoleEntity;
 import com.example.myproject.model.entity.UserRoleEnum;
 import com.example.myproject.model.service.UserRegistrationServiceModel;
+import com.example.myproject.model.view.ProfileHomeView;
 import com.example.myproject.repository.UserRepository;
 import com.example.myproject.repository.UserRoleRepository;
 import com.example.myproject.service.UserService;
 import com.example.myproject.web.exception.ObjectNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +18,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,13 +32,15 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
     private final MyUserDetailsServiceImpl myUserDetailsService;
+    private final ModelMapper modelMapper;
 
     public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository,
-                           UserRoleRepository userRoleRepository, MyUserDetailsServiceImpl myUserDetailsService) {
+                           UserRoleRepository userRoleRepository, MyUserDetailsServiceImpl myUserDetailsService, ModelMapper modelMapper) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.myUserDetailsService = myUserDetailsService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -40,6 +49,48 @@ public class UserServiceImpl implements UserService {
         //initializeUsers();
 
     }
+
+    @Override
+    public List<ProfileHomeView> getAllUsers() {
+
+        Random random = new Random();
+        List<ProfileHomeView> list = new ArrayList<>();
+
+        for (int i=0; i<3; i++){
+            Long id = random.nextLong(1,this.userRepository.count());
+            UserEntity byId = this.userRepository.findById(id).get();
+            ProfileHomeView profileHomeView = mapToHomeView(byId);
+            list.add(profileHomeView);
+        }
+        return list;
+
+    }
+
+    @Override
+    public UserEntity findById(Long id) {
+        return this.userRepository.findById(id).get();
+    }
+
+    private ProfileHomeView mapToHomeView(UserEntity user){
+        ProfileHomeView profileHomeView = modelMapper.map(user, ProfileHomeView.class);
+
+        profileHomeView.setUsername(user.getUsername());
+        profileHomeView.setId(user.getId());
+        if (user.getProfilePictureUrl() == null) {
+            profileHomeView.setProfilePictureUrl("https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg");
+        } else {
+        profileHomeView.setProfilePictureUrl(user.getProfilePictureUrl());
+        }
+        if (user.getDescription() == null){
+            profileHomeView.setDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
+                    " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer");
+        } else {
+        profileHomeView.setDescription( user.getDescription().substring(0, 200));
+        }
+
+        return profileHomeView;
+    }
+
 
     public UserEntity getUserByUsername(String username){
        return userRepository.findByUsername(username).orElseThrow();
@@ -77,36 +128,6 @@ public class UserServiceImpl implements UserService {
         userEntity.setDescription(profile.getDescription());
         userRepository.save(userEntity);
     }
-
-    //    private void initializeUsers(){
-//            if (userRepository.count() == 0){
-//                UserRoleEntity adminRole = userRoleRepository.findByRole(UserRoleEnum.ADMIN);
-//                UserRoleEntity userRole = userRoleRepository.findByRole(UserRoleEnum.USER);
-//
-//                UserEntity admin = new UserEntity();
-//                admin.setUsername("admin");
-//                admin.setPassword(passwordEncoder.encode("password"));
-//                admin.setFirstName("Kalin");
-//                admin.setLastName("Kirevski");
-//                admin.setActive(true);
-//                admin.setRoles(Set.of(adminRole, userRole));
-//                admin.setEmail("email");
-//
-//                userRepository.save(admin);
-//
-//                UserEntity pesho = new UserEntity();
-//                pesho.setUsername("random");
-//                pesho.setPassword(passwordEncoder.encode("password"));
-//                pesho.setFirstName("Valentin");
-//                pesho.setLastName("Simeonov");
-//                pesho.setActive(true);
-//                pesho.setRoles(Set.of(userRole));
-//                pesho.setEmail("peshovemail");
-//
-//                userRepository.save(pesho);
-//            }
-//        }
-//
 
 
 

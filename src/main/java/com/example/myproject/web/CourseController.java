@@ -37,10 +37,10 @@ public class CourseController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
-    public String indexpage (){
-        return "index";
-    }
+//    @GetMapping("/")
+//    public String indexpage (){
+//        return "index";
+//    }
 
     @GetMapping("/courses/add")
     public String getAddOfferPage(Model model) {
