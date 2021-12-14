@@ -46,7 +46,7 @@ public class OfferServiceImpl implements OfferService {
                 .collect(Collectors.toList());
     }
 
-    // TODO transactional moje da ne e neobhodim
+
     @Transactional
     @Override
     public List<OfferDetailsView> getAllOffers() {

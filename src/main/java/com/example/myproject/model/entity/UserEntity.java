@@ -24,6 +24,7 @@ public class UserEntity extends BaseEntity {
     public UserEntity() {
     }
 
+    @Lob
     public String getProfilePictureUrl() {
         return profilePictureUrl;
     }
@@ -32,7 +33,7 @@ public class UserEntity extends BaseEntity {
         this.profilePictureUrl = profilePictureUrl;
     }
 
-    @Column(columnDefinition = "longtext")
+    @Lob
     public String getDescription() {
         return description;
     }

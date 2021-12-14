@@ -10,6 +10,7 @@ import com.example.myproject.web.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,7 +47,7 @@ public class CommentServiceImpl implements CommentService {
         commentViewModel.setId(comment.getId());
         commentViewModel.setCanApprove(true);
         commentViewModel.setCanDelete(true);
-        commentViewModel.setCreated(comment.getCreated());
+        commentViewModel.setCreated(LocalDateTime.now());
         commentViewModel.setComment(comment.getComment());
         commentViewModel.setAuthor(comment.getAuthor().getUsername());
 

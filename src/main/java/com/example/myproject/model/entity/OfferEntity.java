@@ -43,7 +43,8 @@ public class OfferEntity extends BaseEntity{
         this.pictures = pictures;
     }
 
-    @Column(columnDefinition = "longtext")
+    // TODO @Column(columnDefinition = "longtext")
+    @Lob
     public String getImageUrl() {
         return imageUrl;
     }
@@ -79,7 +80,8 @@ public class OfferEntity extends BaseEntity{
         this.price = price;
     }
 
-    @Column(nullable = false, columnDefinition = "longtext")
+    @Column(nullable = false)
+    @Lob
     public String getDescription() {
         return description;
     }
@@ -88,7 +90,7 @@ public class OfferEntity extends BaseEntity{
         this.description = description;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     public UserEntity getAuthor() {
         return author;
     }
