@@ -5,6 +5,7 @@ import com.example.myproject.model.entity.OfferEntity;
 import com.example.myproject.model.service.CommentServiceModel;
 import com.example.myproject.model.view.CommentViewModel;
 import com.example.myproject.repository.OfferRepository;
+import com.example.myproject.repository.UserRepository;
 import com.example.myproject.service.CommentService;
 import com.example.myproject.web.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,11 @@ import java.util.stream.Collectors;
 public class CommentServiceImpl implements CommentService {
 
     private final OfferRepository offerRepository;
+    private final UserRepository userRepository;
 
-    public CommentServiceImpl(OfferRepository offerRepository) {
+    public CommentServiceImpl(OfferRepository offerRepository, UserRepository userRepository) {
         this.offerRepository = offerRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -56,8 +59,20 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentViewModel createComment(CommentServiceModel commentServiceModel) {
-        //TODO
-        return new CommentViewModel();
+        var offer = offerRepository.findById(
+                commentServiceModel.getCourseId())
+        .orElseThrow(()-> new ObjectNotFoundException("Course with id" + commentServiceModel.getCourseId() + " is not found"));
+
+        var author = userRepository.findByUsername(commentServiceModel.getAuthor())
+                .orElseThrow(()-> new ObjectNotFoundException("Author with username " + commentServiceModel.getAuthor() + " is not found"));
+
+
+        CommentEntity comment = new CommentEntity();
+        comment.setCanApprove(false);
+        comment.setComment(commentServiceModel.getComment());
+        comment.setCreated(LocalDateTime.now());
+        comment.setOffer(offer);
+        comment.setAuthor(author);
     }
 
 }

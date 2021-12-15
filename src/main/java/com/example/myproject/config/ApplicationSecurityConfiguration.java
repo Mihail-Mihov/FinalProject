@@ -30,6 +30,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                         requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                 // the next line allows access to the home page, login page and registration for everyone
                         antMatchers("/" , "/users/login", "/users/register" , "/courses/all").permitAll().
+                antMatchers("/api/**").permitAll().
                 //allows error page access
 
                 // we permit the page below only for admin users
