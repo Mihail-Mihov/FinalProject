@@ -4,6 +4,7 @@ import com.example.myproject.model.entity.CommentEntity;
 import com.example.myproject.model.entity.OfferEntity;
 import com.example.myproject.model.service.CommentServiceModel;
 import com.example.myproject.model.view.CommentViewModel;
+import com.example.myproject.repository.CommentRepository;
 import com.example.myproject.repository.OfferRepository;
 import com.example.myproject.repository.UserRepository;
 import com.example.myproject.service.CommentService;
@@ -21,10 +22,12 @@ public class CommentServiceImpl implements CommentService {
 
     private final OfferRepository offerRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
 
-    public CommentServiceImpl(OfferRepository offerRepository, UserRepository userRepository) {
+    public CommentServiceImpl(OfferRepository offerRepository, UserRepository userRepository, CommentRepository commentRepository) {
         this.offerRepository = offerRepository;
         this.userRepository = userRepository;
+        this.commentRepository = commentRepository;
     }
 
 
@@ -73,6 +76,10 @@ public class CommentServiceImpl implements CommentService {
         comment.setCreated(LocalDateTime.now());
         comment.setOffer(offer);
         comment.setAuthor(author);
+
+        CommentEntity save = commentRepository.save(comment);
+
+        return mapAsComment(save);
     }
 
 }
