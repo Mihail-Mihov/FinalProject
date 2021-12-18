@@ -3,20 +3,24 @@ package com.example.myproject.web;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 import com.example.myproject.model.binding.NewCommentBindModel;
 import com.example.myproject.model.entity.CommentEntity;
 import com.example.myproject.model.entity.OfferEntity;
 import com.example.myproject.model.entity.UserEntity;
-import com.example.myproject.repository.CommentRepository;
 import com.example.myproject.repository.OfferRepository;
 import com.example.myproject.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.time.LocalDateTime;
+import java.util.List;
+import org.hamcrest.text.MatchesPattern;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,6 +34,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @WithMockUser("mbmihail")
 @SpringBootTest
@@ -38,6 +43,7 @@ import java.util.List;
 
     private static final String COMMENT_1 = "comment1 asasasasasasas";
     private static final String COMMENT_2 = "comment2 asasasasasasas";
+    int temp = 44;
 
     @Autowired
     private MockMvc mockMvc;
@@ -60,12 +66,13 @@ import java.util.List;
     void setUp(){
         user = new UserEntity();
         user.setPassword("password");
-        user.setUsername("qweqwe");
+        user.setUsername("mbmihail");
         user.setFirstName("qweasd");
         user.setLastName("qweasd");
-        user.setEmail("qweasda@email.com");
+        user.setEmail("dfgsdfg@email.com");
 
-        userRepository.save(user);
+       user = userRepository.save(user);
+
     }
 
     @AfterEach
@@ -80,9 +87,9 @@ import java.util.List;
 
     mockMvc.perform(get("/api/" +offerId.getId() +"/comments")).
             andExpect(status().isOk()).
-            andExpect(jsonPath("$", hasSize(2))).
-            andExpect(jsonPath("$.[0].comment", is (COMMENT_1))).
-            andExpect(jsonPath("$.[1].comment", is(COMMENT_2)));
+            andExpect(jsonPath("$", hasSize(1))).
+            andExpect(jsonPath("$.[0].comment", is (COMMENT_1)));
+           // andExpect(jsonPath("$.[1].comment", is(COMMENT_2)));
     }
 
     @Test
@@ -92,6 +99,8 @@ import java.util.List;
 
          var emptyOffer = initOffer();
 
+
+
          mockMvc.perform(
                  post("/api/"  +emptyOffer.getId() + "/comments")
                  .contentType(MediaType.APPLICATION_JSON)
@@ -100,7 +109,9 @@ import java.util.List;
                          .with(csrf())
          )
                  .andExpect(status().isCreated())
-                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
+                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                // .andExpect(header().string("Location", MatchesPattern.matchesPattern("/api/" + emptyOffer.getId() + "/comment/" + offerRepository.getById(emptyOffer.getId()).getComments().size())))
+                 .andExpect(jsonPath("$.comment").value(is(COMMENT_1)));
     }
 
     private OfferEntity initOffer(){

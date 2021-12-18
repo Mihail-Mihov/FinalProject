@@ -32,6 +32,7 @@ public class UserRegistrationBindingModel {
     private String number;
     private String homeTown;
 
+
     public String getNumber() {
         return number;
     }

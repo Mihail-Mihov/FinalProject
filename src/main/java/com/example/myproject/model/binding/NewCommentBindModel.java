@@ -8,6 +8,15 @@ public class NewCommentBindModel {
     @NotBlank
     @Size(min = 10)
     private String comment;
+    private long id;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getComment() {
         return comment;

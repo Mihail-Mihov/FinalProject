@@ -50,9 +50,9 @@ public class UserRegistrationController {
 
         UserRegistrationServiceModel serviceModel =
                 modelMapper.map(userModel, UserRegistrationServiceModel.class);
-        if (serviceModel.getProfilePictureUrl().isEmpty()){
+
             serviceModel.setProfilePictureUrl("https://st.depositphotos.com/1052233/2885/v/600/depositphotos_28850541-stock-illustration-male-default-profile-picture.jpg");
-        }
+
 
         userService.registerAndLoginUser(serviceModel);
 
