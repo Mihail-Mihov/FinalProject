@@ -99,8 +99,6 @@ import java.util.regex.Pattern;
 
          var emptyOffer = initOffer();
 
-
-
          mockMvc.perform(
                  post("/api/"  +emptyOffer.getId() + "/comments")
                  .contentType(MediaType.APPLICATION_JSON)

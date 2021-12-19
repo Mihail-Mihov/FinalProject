@@ -46,8 +46,7 @@ public class CourseController {
     public String getAddOfferPage(Model model) {
 
         if (!model.containsAttribute("offerAddBindModel")) {
-            model.
-                    addAttribute("offerAddBindModel", new OfferAddBindModel());
+            model.addAttribute("offerAddBindModel", new OfferAddBindModel());
         }
         return "addcourse";
     }

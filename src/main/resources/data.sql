@@ -8,17 +8,29 @@
 # VALUES (3, 1);
 
 -- some test users
-INSERT INTO users (id, active, email, first_name, last_name, password, username)
-VALUES (1, true, 'admin@admin.com', 'Kalin', 'Kirevski', '14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa319cbb6565f648ccf0e11c57648b79ca', 'kmkalin');
+INSERT INTO users (id, active, description, email, first_name, home_town , last_name, number, password, username)
+VALUES (1, true, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer' ,
+        'admin@admin.com', 'Kalin', 'Sofia' ,'Kirevski','0896369845' , '14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa319cbb6565
+f648ccf0e11c57648b79ca', 'kmkalin');
 
-INSERT INTO users (id, active, email, first_name, last_name, password, username)
-VALUES (2, true, 'valio@admin.com', 'Valentin', 'Simeonov', '14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa319cbb6565f648ccf0e11c57648b79ca',  'svalio');
+INSERT INTO users (id, active, description,email, first_name, home_town ,last_name, number,password, username)
+VALUES (2, true, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer'
+ , 'valio@admin.com', 'Valentin','Pernik' , 'Simeonov', '0896369845','14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa
+319cbb6565f648ccf0e11c57648b79ca',  'svalio');
 
-INSERT INTO users (id, active, email, first_name, last_name, password, username)
-VALUES (3, true, 'misho@admin.com', 'Mihail', 'Mihov', '14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa319cbb6565f648ccf0e11c57648b79ca', 'mbmihail');
+INSERT INTO users (id, active, description, email, first_name, home_town,last_name, number, password, username)
+VALUES (3, true,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer'
+ , 'misho@admin.com', 'Mihail', 'Gabrovo' , 'Mihov', '0896369845', '14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa
+319cbb6565f648ccf0e11c57648b79ca', 'mbmihail');
 
-INSERT INTO users (id, active, email, first_name, last_name, password, username)
-VALUES (4, true, 'rosen@admin.com', 'Rosen', 'Rusecv', '14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa319cbb6565f648ccf0e11c57648b79ca',  'rrosen');
+INSERT INTO users (id, active, description, email, first_name, home_town, last_name, number, password, username)
+VALUES (4, true, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer'
+, 'rosen@admin.com', 'Rosen','Teteven' , 'Rusecv', '0896369845' ,'14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa31
+9cbb6565f648ccf0e11c57648b79ca',  'rrosen');
 -- user roles
 -- admin
 INSERT INTO users_roles (`user_entity_id`, `roles_id`)
@@ -76,14 +88,14 @@ INSERT INTO offers  (category, description, image_url, name, price, author_id)
 VALUES (0, 'PHP is a widely used server-side programming language that’s become increasingly fast and powerful over the
 years. PHP works well with HTML and databases, making it a great language for anyone interested in building dynamic web
  applications.', 'https://s3.amazonaws.com/coursesity-blog/2019/01/php-1.png'
-       , 'PHP Course', 23.88, 1);
+       , 'PHP Course', 23.88, 2);
 
 
 INSERT INTO offers  (category, description, image_url, name, price, author_id)
 VALUES (0, ' This Oracle Database: PL/SQL Fundamentals training introduces you to PL/SQL and explains the benefits of
 this programming language. You''ll learn how to create PL/SQL blocks of application code that can be shared by multiple
 forms, reports and data management applications.', 'https://www.zenfotec.com/wp-content/uploads/2018/04/Oracle-PL-SQL.jpg'
-       , 'PL/SQL-ORACLE Course', 999.88, 1);
+       , 'PL/SQL-ORACLE Course', 999.88, 2);
 
 
 INSERT INTO offers  (category, description, image_url, name, price, author_id)
@@ -91,4 +103,4 @@ VALUES (0, 'Welcome to Android Basics in Kotlin! In this course, you''ll learn t
 the Kotlin programming language. Along the way, you''ll develop a collection of apps to start your journey as an Android
 developer.',
         'https://miro.medium.com/max/1200/1*8YPjY2xhNwQylBBs8dYB0g.png'
-       , 'Guitar Course', 281.88, 1);
+       , 'Guitar Course', 281.88, 2);

@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     private final MyUserDetailsServiceImpl myUserDetailsService;
     private final ModelMapper modelMapper;
 
-    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository,
+    public UserServiceImpl( PasswordEncoder passwordEncoder,UserRepository userRepository,
                            UserRoleRepository userRoleRepository, MyUserDetailsServiceImpl myUserDetailsService, ModelMapper modelMapper) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
@@ -42,6 +42,8 @@ public class UserServiceImpl implements UserService {
         this.myUserDetailsService = myUserDetailsService;
         this.modelMapper = modelMapper;
     }
+
+
 
     @Override
     public void initializeUsersAndRoles() {
@@ -56,11 +58,13 @@ public class UserServiceImpl implements UserService {
         Random random = new Random();
         List<ProfileHomeView> list = new ArrayList<>();
 
-        for (int i=0; i<3; i++){
-            Long id = random.nextLong(1,this.userRepository.count());
-            UserEntity byId = this.userRepository.findById(id).get();
-            ProfileHomeView profileHomeView = mapToHomeView(byId);
-            list.add(profileHomeView);
+        if (userRepository.count() >= 3) {
+            for (int i=0; i<3; i++){
+                Long id = random.nextLong(1,this.userRepository.count());
+                UserEntity byId = this.userRepository.findById(id).get();
+                ProfileHomeView profileHomeView = mapToHomeView(byId);
+                list.add(profileHomeView);
+            }
         }
         return list;
 
@@ -85,7 +89,12 @@ public class UserServiceImpl implements UserService {
             profileHomeView.setDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
                     " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer");
         } else {
-        profileHomeView.setDescription( user.getDescription().substring(0, 200));
+            if (user.getDescription().length() > 200) {
+                profileHomeView.setDescription( user.getDescription().substring(0, 200));
+            }
+            else {
+                profileHomeView.setDescription(user.getDescription());
+            }
         }
 
         return profileHomeView;
