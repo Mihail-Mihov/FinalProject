@@ -25,7 +25,7 @@ public class OfferEntity extends BaseEntity{
     public OfferEntity() {
     }
 
-    @OneToMany(mappedBy = "offer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "offer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<CommentEntity> getComments() {
         return comments;
     }

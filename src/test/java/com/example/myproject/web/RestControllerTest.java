@@ -19,6 +19,7 @@ import com.example.myproject.repository.OfferRepository;
 import com.example.myproject.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.hamcrest.text.MatchesPattern;
 import org.junit.jupiter.api.AfterEach;
@@ -124,15 +125,19 @@ import java.util.regex.Pattern;
 
     private OfferEntity initComments(OfferEntity offer){
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String formatDateTime = now.format(formatter);
+
         CommentEntity comment1 = new CommentEntity();
-        comment1.setCreated(LocalDateTime.now());
+        comment1.setCreated(formatDateTime);
         comment1.setAuthor(user);
         comment1.setComment(COMMENT_1);
         comment1.setCanApprove(true);
         comment1.setOffer(offer);
 
         CommentEntity comment2 = new CommentEntity();
-        comment2.setCreated(LocalDateTime.now());
+        comment2.setCreated(formatDateTime);
         comment2.setAuthor(user);
         comment2.setComment(COMMENT_2);
         comment2.setCanApprove(true);

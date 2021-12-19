@@ -12,7 +12,7 @@ public class CommentViewModel {
     private String author;
     private String comment;
     private OfferEntity offer;
-    private LocalDateTime created;
+    private String created;
     private boolean canApprove;
     private boolean canDelete;
 
@@ -48,11 +48,11 @@ public class CommentViewModel {
         this.offer = offer;
     }
 
-    public LocalDateTime getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 

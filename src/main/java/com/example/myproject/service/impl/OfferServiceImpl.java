@@ -32,7 +32,6 @@ public class OfferServiceImpl implements OfferService {
     }
 
 
-
     @Override
     public List<OfferEntity> getAllByAuthor(String author) {
         return offerRepository.getAllByAuthor(author);

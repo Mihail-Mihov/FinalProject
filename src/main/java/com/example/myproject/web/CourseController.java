@@ -2,15 +2,17 @@ package com.example.myproject.web;
 
 import com.example.myproject.model.binding.OfferAddBindModel;
 import com.example.myproject.model.binding.OfferUpdateBindModel;
+import com.example.myproject.model.entity.OfferEntity;
+import com.example.myproject.model.entity.UserEntity;
 import com.example.myproject.model.service.OfferAddServiceModel;
 import com.example.myproject.model.service.OfferUpdateServiceModel;
 import com.example.myproject.model.view.OfferDetailsView;
+import com.example.myproject.repository.OfferRepository;
 import com.example.myproject.repository.UserRepository;
 import com.example.myproject.service.OfferService;
 import com.example.myproject.service.UserService;
 import com.example.myproject.service.impl.MyUser;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -21,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class CourseController {
@@ -29,18 +31,15 @@ public class CourseController {
     private final OfferService offerService;
     private final ModelMapper modelMapper;
     private final UserService userService;
+    private final OfferRepository offerRepository;
 
 
-    public CourseController(OfferService offerService, ModelMapper modelMapper, UserRepository userRepository, UserService userService) {
+    public CourseController(OfferService offerService, ModelMapper modelMapper, UserRepository userRepository, UserService userService, OfferRepository offerRepository) {
         this.offerService = offerService;
         this.modelMapper = modelMapper;
         this.userService = userService;
+        this.offerRepository = offerRepository;
     }
-
-//    @GetMapping("/")
-//    public String indexpage (){
-//        return "index";
-//    }
 
     @GetMapping("/courses/add")
     public String getAddOfferPage(Model model) {
@@ -83,8 +82,6 @@ public class CourseController {
                 offerDetailsView,
                 OfferUpdateBindModel.class
         );
-//        model.addAttribute("engines", EngineEnum.values());
-//        model.addAttribute("transmissions", TransmissionEnum.values());
         model.addAttribute("offerModel", offerModel);
         return "edit";
     }
@@ -118,12 +115,6 @@ public class CourseController {
     }
 
 
-//    @GetMapping("/offers/{id}/edit/errors")
-//    public String editOfferErrors(@PathVariable Long id, Model model) {
-////        model.addAttribute("engines", EngineEnum.values());
-////        model.addAttribute("transmissions", TransmissionEnum.values());
-//        return "edit";
-   // }
 
      @PreAuthorize("isOwner(#id)")
     @DeleteMapping("/courses/{id}")
@@ -140,8 +131,13 @@ public class CourseController {
     @GetMapping("/courses/{id}/details")
     public String showOffer(@PathVariable Long id, Model model,
                             @AuthenticationPrincipal User user){
+        String authorAddress = offerRepository.findById(id).get().getAuthor().getHomeTown();
+        int size =  offerRepository.findById(id).get().getComments().size();
+
 
         model.addAttribute("offer", offerService.findById(id, user.getUsername()));
+        model.addAttribute("commentCounter", size);
+        model.addAttribute("authorAddress", authorAddress);
         return "course-details";
     }
 
@@ -150,17 +146,6 @@ public class CourseController {
         model.addAttribute("courses", offerService.getAllOffers());
         return "allcourses";
     }
-
-//    @RequestMapping("/courses/all")
-//    public String allOffers( Model model, String keyword) {
-//        if(keyword!=null) {
-//            List<OfferDetailsView> offers = offerService.getByKeyword(keyword);
-//            model.addAttribute("courses", offers);
-//        }else {
-//            List<OfferDetailsView> offers = offerService.getAllOffers();
-//            model.addAttribute("courses", offers);}
-//        return "allcourses";
-//    }
 
 
 

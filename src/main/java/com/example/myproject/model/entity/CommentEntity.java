@@ -13,7 +13,7 @@ public class CommentEntity extends BaseEntity{
     private UserEntity author;
     private String comment;
     private OfferEntity offer;
-    private LocalDateTime created;
+    private String created;
     private boolean canApprove;
     private boolean canDelete;
 
@@ -21,11 +21,11 @@ public class CommentEntity extends BaseEntity{
     public CommentEntity() {
     }
 
-    public LocalDateTime getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 

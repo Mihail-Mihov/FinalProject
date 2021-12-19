@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,10 +51,14 @@ public class CommentServiceImpl implements CommentService {
     private CommentViewModel mapAsComment(CommentEntity comment){
         CommentViewModel commentViewModel = new CommentViewModel();
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String formatDateTime = now.format(formatter);
+
         commentViewModel.setId(comment.getId());
         commentViewModel.setCanApprove(true);
         commentViewModel.setCanDelete(true);
-        commentViewModel.setCreated(LocalDateTime.now());
+        commentViewModel.setCreated(formatDateTime);
         commentViewModel.setComment(comment.getComment());
         commentViewModel.setAuthor(comment.getAuthor().getUsername());
 
@@ -69,11 +74,14 @@ public class CommentServiceImpl implements CommentService {
         var author = userRepository.findByUsername(commentServiceModel.getAuthor())
                 .orElseThrow(()-> new ObjectNotFoundException("Author with username " + commentServiceModel.getAuthor() + " is not found"));
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String formatDateTime = now.format(formatter);
 
         CommentEntity comment = new CommentEntity();
         comment.setCanApprove(false);
         comment.setComment(commentServiceModel.getComment());
-        comment.setCreated(LocalDateTime.now());
+        comment.setCreated(formatDateTime);
         comment.setOffer(offer);
         comment.setAuthor(author);
 

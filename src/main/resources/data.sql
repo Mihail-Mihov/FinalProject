@@ -104,3 +104,22 @@ the Kotlin programming language. Along the way, you''ll develop a collection of 
 developer.',
         'https://miro.medium.com/max/1200/1*8YPjY2xhNwQylBBs8dYB0g.png'
        , 'Guitar Course', 281.88, 2);
+
+insert into comments (can_approve, can_delete, comment, created, author_id, offer_id)
+values  (true, true, 'test comment 2' , '2021-12-19 18:48:12', 2, 1);
+
+insert into comments (can_approve, can_delete, comment, created, author_id, offer_id)
+values  (true, true, 'test comment 3' , '2021-12-19 18:48:12', 2, 2);
+
+insert into comments (can_approve, can_delete, comment, created, author_id, offer_id)
+values  (true, true, 'test comment 4' , '2021-12-19 18:48:12', 2, 3);
+
+insert into comments (can_approve, can_delete, comment, created, author_id, offer_id)
+values  (true, true, 'test comment 5' , '2021-12-19 18:48:12', 2, 4);
+
+insert into comments (can_approve, can_delete, comment, created, author_id, offer_id)
+values  (true, true, 'test comment 6' , '2021-12-19 18:48:12', 2, 5);
+
+insert into comments (can_approve, can_delete, comment, created, author_id, offer_id)
+values  (true, true, 'test comment 7' , '2021-12-19 18:48:12', 2, 6);
+
