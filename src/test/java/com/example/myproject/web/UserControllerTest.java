@@ -202,7 +202,7 @@ class UserRegistrationControllerTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
         ).andExpect(status().is3xxRedirection());
 
-        Assertions.assertEquals(3, userRepository.count());
+        Assertions.assertEquals(5, userRepository.count());
 
         Optional<UserEntity> userEntity = userRepository.findByUsername("kmkalin");
 
