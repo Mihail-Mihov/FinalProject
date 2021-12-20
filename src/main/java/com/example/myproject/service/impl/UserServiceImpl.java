@@ -155,6 +155,8 @@ public class UserServiceImpl implements UserService {
         user.setHomeTown(userRegistrationServiceModel.getHomeTown());
         user.setFirstName(userRegistrationServiceModel.getFirstName());
         user.setLastName(userRegistrationServiceModel.getLastName());
+        user.setProfilePictureUrl("https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg");
+        user.setDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.");
         user.setPassword(passwordEncoder.encode(userRegistrationServiceModel.getPassword()));
         if (user.getUsername().equals("admin")) {
             user.setRoles(Set.of(userRoleRepository.findByRole(UserRoleEnum.ADMIN)));
