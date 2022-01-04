@@ -9,30 +9,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
 
-//    private final Interceptor statsInterceptor;
-//
-//    public WebConfiguration(Interceptor statsInterceptor) {
-//        this.statsInterceptor = statsInterceptor;
-//    }
-//
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(statsInterceptor);
-//    }
-//
-
 
 //    @Override
 //    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new LoggerInterceptor());
-//
+//        registry.addInterceptor(new SessionTimerInterceptor());
+//        registry.addInterceptor(new UserInterceptor());
 //    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new SessionTimerInterceptor());
-        registry.addInterceptor(new UserInterceptor());
-    }
 
 
 }

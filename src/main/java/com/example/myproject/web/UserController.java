@@ -58,7 +58,7 @@ public class UserController {
         ProfileDetailsView profile = modelMapper.map(userEntity, ProfileDetailsView.class);
         profile.setCanUpdate(true);
 
-        List<OfferEntity> allByAuthor = offerService.getAllByAuthor(profile.getUsername());
+        List<OfferEntity> allByAuthor = offerService.getAllByAuthor(userEntity.getUsername());
 
         model.addAttribute("userEntity", profile);
         model.addAttribute("offersDetails", allByAuthor);
@@ -86,6 +86,7 @@ public class UserController {
         userService.updateProfile(profileUpdateBindingModel);
         return "redirect:/profile";
     }
+
 
     @GetMapping("/profile/edit")
     public String editProfile( Model model,

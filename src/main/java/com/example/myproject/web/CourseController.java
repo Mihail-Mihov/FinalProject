@@ -53,7 +53,7 @@ public class CourseController {
     @PostMapping("/courses/add")
     public String addOffer (@Valid OfferAddBindModel offerAddBindModel,
                             BindingResult bindingResult,  RedirectAttributes redirectAttributes,
-                            @AuthenticationPrincipal MyUser user){
+                            @AuthenticationPrincipal User user){
 
 
 
@@ -64,7 +64,8 @@ public class CourseController {
             return "redirect:/courses/add";
         }
 
-        OfferAddServiceModel savedOfferAddServiceModel  = offerService.addOffer(offerAddBindModel, user.getUserIdentifier());
+        System.out.println(user);
+        OfferAddServiceModel savedOfferAddServiceModel  = offerService.addOffer(offerAddBindModel, user.getUsername());
         return "redirect:/courses/all";
        // return "redirect:/courses/" + savedOfferAddServiceModel.getId() + "/details";
     }
@@ -92,8 +93,6 @@ public class CourseController {
             @Valid OfferUpdateBindModel offerModel,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
-
-        System.out.println(offerModel);
 
 
         if (bindingResult.hasErrors()) {

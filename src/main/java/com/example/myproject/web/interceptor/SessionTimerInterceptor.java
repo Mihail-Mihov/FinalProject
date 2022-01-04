@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 public class SessionTimerInterceptor implements HandlerInterceptor {
 
-    private static final long MAX_INACTIVE_SESSION_TIME = 3 * 10000;
+    private static final long MAX_INACTIVE_SESSION_TIME = 10 * 10000;
     private static Logger log = LoggerFactory.getLogger(SessionTimerInterceptor.class);
 
     @Autowired

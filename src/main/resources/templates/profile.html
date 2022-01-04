@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head >
     <meta charset="utf-8">
-    <title>Edit Profile</title>
+    <title>Show Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
@@ -37,11 +37,6 @@
                     </ul>
                     <ul class="social-icon-style2 ps-0">
 
-                        <a  th:href="@{/profile/edit}">
-                        <li><li th:if="*{canUpdate}" class="btn btn-round btn-danger fa fa-shopping-cart"
-                               th:href="@{/profile/edit}">Update Profile</li></li>
-
-                        </a>
 
                     </ul>
                 </div>
@@ -63,17 +58,19 @@
 
                     <div  class="row mt-n4">
 
-                        <a  th:href="@{/courses/{id}/details(id= *{id})}">
-                        <div  class="col-sm-6 col-xl-4 mt-4" th:each="o : ${offersDetails}" th:object="${o}">
-                            <div class="card text-center border-0 rounded-3">
-                                <div class="card-body">
-                                    <img  th:src="*{imageUrl}" class="img-fluid max-width: 20px" alt="...">
-                                    <h3 th:text="*{name}" class="h5 mb-3">Education</h3>
-                                    <p th:text="*{description}" class="mb-0">University of defgtion, fecat complete ME of synage</p>
+
+                            <div  class="col-sm-6 col-xl-4 mt-4" th:each="o : ${offersDetails}" th:object="${o}">
+                                <div class="card text-center border-0 rounded-3">
+                                    <a  th:href="@{/courses/{id}/details(id= *{id})}">
+                                    <div class="card-body">
+                                        <img  th:src="*{imageUrl}" class="img-fluid max-width: 20px" alt="...">
+                                        <h3 th:text="*{name}" class="h5 mb-3"></h3>
+                                        <p th:text="*{description}"  class="mb-0"></p>
+                                    </div>
+                                    </a>
                                 </div>
                             </div>
-                        </div>
-                        </a>
+
 
                     </div>
                 </div>

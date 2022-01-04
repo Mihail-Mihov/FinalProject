@@ -1,0 +1,287 @@
+body{margin-top:20px;
+    background:#eee;
+}
+
+
+.content-item {
+    padding:30px 0;
+    background-color:#FFFFFF;
+}
+
+.content-item.grey {
+    background-color:#F0F0F0;
+    padding:50px 0;
+    height:100%;
+}
+
+.content-item h2 {
+    font-weight:700;
+    font-size:35px;
+    line-height:45px;
+    text-transform:uppercase;
+    margin:20px 0;
+}
+
+.content-item h3 {
+    font-weight:400;
+    font-size:20px;
+    color:#555555;
+    margin:10px 0 15px;
+    padding:0;
+}
+
+.content-headline {
+    height:1px;
+    text-align:center;
+    margin:20px 0 70px;
+}
+
+.content-headline h2 {
+    background-color:#FFFFFF;
+    display:inline-block;
+    margin:-20px auto 0;
+    padding:0 20px;
+}
+
+.grey .content-headline h2 {
+    background-color:#F0F0F0;
+}
+
+.content-headline h3 {
+    font-size:14px;
+    color:#AAAAAA;
+    display:block;
+}
+
+
+#comments {
+    box-shadow: 0 -1px 6px 1px rgba(0,0,0,0.1);
+    background-color:#FFFFFF;
+}
+
+#comments form {
+    margin-bottom:30px;
+}
+
+#comments .btn {
+    margin-top:7px;
+}
+
+#comments form fieldset {
+    clear:both;
+}
+
+#comments form textarea {
+    height:100px;
+}
+
+#comments .media {
+    border-top:1px dashed #DDDDDD;
+    padding:20px 0;
+    margin:0;
+}
+
+#comments .media > .pull-left {
+    margin-right:20px;
+}
+
+#comments .media img {
+    max-width:100px;
+}
+
+#comments .media h4 {
+    margin:0 0 10px;
+}
+
+#comments .media h4 span {
+    font-size:14px;
+    float:right;
+    color:#999999;
+}
+
+#comments .media p {
+    margin-bottom:15px;
+    text-align:justify;
+}
+
+#comments .media-detail {
+    margin:0;
+}
+
+#comments .media-detail li {
+    color:#AAAAAA;
+    font-size:12px;
+    padding-right: 10px;
+    font-weight:600;
+}
+
+#comments .media-detail a:hover {
+    text-decoration:underline;
+}
+
+#comments .media-detail li:last-child {
+    padding-right:0;
+}
+
+#comments .media-detail li i {
+    color:#666666;
+    font-size:15px;
+    margin-right:10px;
+}
+
+/*panel*/
+.panel {
+    border: none;
+    box-shadow: none;
+}
+
+.panel-heading {
+    border-color:#eff2f7 ;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.panel-title {
+    color: #2A3542;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*product list*/
+
+.prod-cat li a{
+    border-bottom: 1px dashed #d9d9d9;
+}
+
+.prod-cat li a {
+    color: #3b3b3b;
+}
+
+.prod-cat li ul {
+    margin-left: 30px;
+}
+
+.prod-cat li ul li a{
+    border-bottom:none;
+}
+.prod-cat li ul li a:hover,.prod-cat li ul li a:focus, .prod-cat li ul li.active a , .prod-cat li a:hover,.prod-cat li a:focus, .prod-cat li a.active{
+    background: none;
+    color: #ff7261;
+}
+
+.pro-lab{
+    margin-right: 20px;
+    font-weight: normal;
+}
+
+.pro-sort {
+    padding-right: 20px;
+    float: left;
+}
+
+.pro-page-list {
+    margin: 5px 0 0 0;
+}
+
+.product-list img{
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+}
+
+.product-list .pro-img-box {
+    position: relative;
+}
+.adtocart {
+    background: #fc5959;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    border: 3px solid #fff;
+    left: 45%;
+    bottom: -25px;
+    position: absolute;
+}
+
+.adtocart i{
+    color: #fff;
+    font-size: 25px;
+    line-height: 42px;
+}
+
+.pro-title {
+    color: #5A5A5A;
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.product-list .price {
+    color:#fc5959 ;
+    font-size: 15px;
+}
+
+.pro-img-details {
+    margin-left: -15px;
+}
+
+.pro-img-details img {
+    width: 100%;
+}
+
+.pro-d-title {
+    font-size: 16px;
+    margin-top: 0;
+}
+
+.product_meta {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    margin: 15px 0;
+}
+
+.product_meta span {
+    display: block;
+    margin-bottom: 10px;
+}
+.product_meta a, .pro-price{
+    color:#fc5959 ;
+}
+
+.pro-price, .amount-old {
+    font-size: 18px;
+    padding: 0 10px;
+}
+
+.amount-old {
+    text-decoration: line-through;
+}
+
+.quantity {
+    width: 120px;
+}
+
+.pro-img-list {
+    margin: 10px 0 0 -15px;
+    width: 100%;
+    display: inline-block;
+}
+
+.pro-img-list a {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.pro-d-head {
+    font-size: 18px;
+    font-weight: 300;
+}

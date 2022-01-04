@@ -1,31 +1,10 @@
-console.log("asdasdqwe");
+const courseId = document.getElementById('courseId').value
 
-
-function check_checkbox() {
-    if ($('#terms').is(':checked')) {
-        return true;
-    } else {
-        alert("За да продължиш, маркирай чекбокса!");
-        return false;
-    }
-}
-
-function search() {
-    var searchbar = document.getElementById("searchBar");
-
-
-}
-
-// const csrfHeaderName = document.head.querySelector('[name="_csrf_header"]').content;
-// const csrfHeaderValue = document.head.querySelector('[name="_csrf"]').content;
-const csrfHeaderName = "headerName";
-const csrfHeaderValue = "_csrf.token";
+const csrfHeaderName = document.head.querySelector('[name="_csrf_header"]').content;
+const csrfHeaderValue = document.head.querySelector('[name="_csrf"]').content;
 
 const commentForm = document.getElementById('commentForm')
 commentForm.addEventListener("submit", commentSubmit)
-
-const courseId = document.getElementById('courseId').value;
-
 const commentsCtnr  = document.getElementById('commentCtnr');
 
 const allComents = []
@@ -51,8 +30,8 @@ async function commentSubmit(event) {
         const responseData = await postFormDataAsJson({url, formData});
 
         commentsCtnr.insertAdjacentHTML("afterbegin", asComment(responseData));
-
         form.reset();
+
     } catch (error) {
 
         let errorObj = JSON.parse(error.message);

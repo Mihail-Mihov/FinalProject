@@ -21,6 +21,6 @@ public class MyUser extends User {
     }
 
     public String getUserIdentifier(){
-        return getUsername();
+        return this.getUsername();
     }
 }
