@@ -10,7 +10,6 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>FinalProject</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>FinalProject</name>
     <description>FinalProject</description>
     <properties>
@@ -56,9 +55,9 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

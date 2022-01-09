@@ -19,7 +19,7 @@ public class ApiError {
     }
 
     public void addFieldWithError(String error){
-
+        fieldWithErrors.add(error);
     }
 
     public List<String> getFieldWithErrors() {
