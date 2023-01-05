@@ -7,7 +7,6 @@ import com.example.myproject.model.view.ProfileDetailsView;
 import com.example.myproject.model.view.ProfileHomeView;
 import com.example.myproject.service.OfferService;
 import com.example.myproject.service.UserService;
-import com.example.myproject.service.impl.MyUser;
 import com.example.myproject.service.impl.MyUserDetailsServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -42,7 +42,7 @@ public class UserController {
     @GetMapping("/")
     public String showProfileHome( Model model) {
 
-        List<ProfileHomeView> allUsers = this.userService.getAllUsers();
+        Set<ProfileHomeView> allUsers = userService.getAllUsers();
 
         model.addAttribute("allUsers", allUsers);
 
@@ -58,7 +58,7 @@ public class UserController {
         ProfileDetailsView profile = modelMapper.map(userEntity, ProfileDetailsView.class);
         profile.setCanUpdate(true);
 
-        List<OfferEntity> allByAuthor = offerService.getAllByAuthor(userEntity.getUsername());
+        List<OfferEntity> allByAuthor = offerService.getAllByAuthor(userEntity.getId());
 
         model.addAttribute("userEntity", profile);
         model.addAttribute("offersDetails", allByAuthor);
@@ -110,7 +110,7 @@ public class UserController {
   public String showProfile(@PathVariable Long id, Model model) {
 
       UserEntity byId = userService.findById(id);
-      List<OfferEntity> allByAuthor = offerService.getAllByAuthor(byId.getUsername());
+      List<OfferEntity> allByAuthor = offerService.getAllByAuthor(byId.getId());
       ProfileDetailsView profileDetailsView =  modelMapper.map(byId, ProfileDetailsView.class);
       if (profileDetailsView.getProfilePictureUrl() == null) {
           profileDetailsView.setProfilePictureUrl("https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg");

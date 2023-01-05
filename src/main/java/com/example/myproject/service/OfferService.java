@@ -12,11 +12,11 @@ public interface OfferService {
 
     // void initializeOffers();
 
-    List<OfferDetailsView> getAllOffers();
+    List<OfferDetailsView> getAllOffers(String currentUser);
 
     List<OfferDetailsView> getByKeyword(String keyword);
 
-    OfferDetailsView findById(Long id, String currentUser);
+    OfferDetailsView findOfferById(Long id, String currentUser);
 
     void deleteOffer(Long id);
 
@@ -26,5 +26,5 @@ public interface OfferService {
 
     OfferAddServiceModel addOffer(OfferAddBindModel offerAddBindModel, String ownerId);
 
-    List<OfferEntity> getAllByAuthor(String author);
+    List<OfferEntity> getAllByAuthor(Long authorId);
 }

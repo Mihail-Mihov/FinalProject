@@ -33,8 +33,8 @@ public class OfferServiceImpl implements OfferService {
 
 
     @Override
-    public List<OfferEntity> getAllByAuthor(String author) {
-        return offerRepository.getAllByAuthor(author);
+    public List<OfferEntity> getAllByAuthor(Long authorId) {
+        return offerRepository.getAllByAuthor(authorId);
     }
 
     @Override
@@ -48,25 +48,23 @@ public class OfferServiceImpl implements OfferService {
 
     @Transactional
     @Override
-    public List<OfferDetailsView> getAllOffers() {
+    public List<OfferDetailsView> getAllOffers(String currentUser) {
         return offerRepository.
-                findAll().
+                findAllOffers().
                 stream().
-                map(o -> modelMapper.map(o, OfferDetailsView.class)).
+                map(o -> mapToDetailsView(currentUser, o)).
                 collect(Collectors.toList());
     }
 
     @Override
-    public OfferDetailsView findById(Long id, String currentUser) {
-        return this.offerRepository.
+    public OfferDetailsView findOfferById(Long id, String currentUser) {
+        return  offerRepository.
                 findById(id).
                 map(o -> mapToDetailsView(currentUser, o))
                 .get();
 
     }
-
     private OfferDetailsView mapToDetailsView(String currentUser, OfferEntity offer) {
-       // OfferDetailsView offerDetailsView = this.modelMapper.map(offer, OfferDetailsView.class);
 
         return OfferDetailsView.builder()
                 .id(offer.getId())

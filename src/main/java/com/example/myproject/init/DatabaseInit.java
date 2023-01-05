@@ -18,7 +18,7 @@ public class DatabaseInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        userService.initializeUsersAndRoles();
+        //userService.initializeUsersAndRoles();
       //  offerService.initializeOffers();
     }
 }

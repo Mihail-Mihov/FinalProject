@@ -22,7 +22,7 @@ public class OfferEntity extends BaseEntity{
     private String name;
     private Integer rate;
     // TODO @Column(columnDefinition = "longtext")
-    @Lob
+    @Lob@Enumerated(EnumType.STRING)
     private String imageUrl;
     @Column(nullable = false)
     private Double price;
@@ -31,7 +31,7 @@ public class OfferEntity extends BaseEntity{
     private String description;
     @ManyToOne(cascade = CascadeType.REMOVE)
     private UserEntity author;
-    @Enumerated(STRING)
+    @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
     private CategoryEnum category;
     @OneToMany(mappedBy = "offer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

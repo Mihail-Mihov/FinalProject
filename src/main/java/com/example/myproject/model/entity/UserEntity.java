@@ -38,6 +38,6 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Set<UserRoleEntity> roles = new HashSet<>();
-    private boolean isActive;
+    private int active;
 
 }

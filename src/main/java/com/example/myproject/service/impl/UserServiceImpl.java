@@ -18,10 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -45,21 +42,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void initializeUsersAndRoles() {
-        initializeRoles();
+      initializeRoles();
         //initializeUsers();
 
     }
 
     @Override
-    public List<ProfileHomeView> getAllUsers() {
+    public Set<ProfileHomeView> getAllUsers() {
 
         Random random = new Random();
-        List<ProfileHomeView> list = new ArrayList<>();
+        Set<ProfileHomeView> list = new HashSet<>();
 
         if (userRepository.count() >= 3) {
             for (int i=0; i<3; i++){
                 Long id = random.nextLong(1,this.userRepository.count());
-                UserEntity byId = this.userRepository.findById(id).get();
+                UserEntity byId =  findById(id);
                 ProfileHomeView profileHomeView = mapToHomeView(byId);
                 list.add(profileHomeView);
             }
@@ -146,7 +143,7 @@ public class UserServiceImpl implements UserService {
 
         user.setUsername(userRegistrationServiceModel.getUsername());
         user.setEmail(userRegistrationServiceModel.getEmail());
-        user.setActive(true);
+        user.setActive(1);
         user.setNumber(userRegistrationServiceModel.getNumber());
         user.setHomeTown(userRegistrationServiceModel.getHomeTown());
         user.setFirstName(userRegistrationServiceModel.getFirstName());

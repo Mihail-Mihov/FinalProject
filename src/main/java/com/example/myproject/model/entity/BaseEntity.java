@@ -10,10 +10,6 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@Data
 public abstract  class BaseEntity {
 
     @Id

@@ -2,7 +2,6 @@ package com.example.myproject.web;
 
 import com.example.myproject.model.binding.OfferAddBindModel;
 import com.example.myproject.model.binding.OfferUpdateBindModel;
-import com.example.myproject.model.entity.OfferEntity;
 import com.example.myproject.model.entity.UserEntity;
 import com.example.myproject.model.service.OfferAddServiceModel;
 import com.example.myproject.model.service.OfferUpdateServiceModel;
@@ -11,7 +10,6 @@ import com.example.myproject.repository.OfferRepository;
 import com.example.myproject.repository.UserRepository;
 import com.example.myproject.service.OfferService;
 import com.example.myproject.service.UserService;
-import com.example.myproject.service.impl.MyUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 public class CourseController {
@@ -70,15 +67,11 @@ public class CourseController {
        // return "redirect:/courses/" + savedOfferAddServiceModel.getId() + "/details";
     }
 
-
-
-
-
     @GetMapping("/courses/{id}/edit")
     public String editOffer(@PathVariable Long id, Model model,
                             @AuthenticationPrincipal User currentUser) {
 
-        OfferDetailsView offerDetailsView = offerService.findById(id, currentUser.getUsername());
+        OfferDetailsView offerDetailsView = offerService.findOfferById(id, currentUser.getUsername());
         OfferUpdateBindModel offerModel = modelMapper.map(
                 offerDetailsView,
                 OfferUpdateBindModel.class
@@ -114,7 +107,6 @@ public class CourseController {
     }
 
 
-
      @PreAuthorize("isOwner(#id)")
     @DeleteMapping("/courses/{id}")
     public String deleteOffer(@PathVariable Long id,
@@ -130,19 +122,20 @@ public class CourseController {
     @GetMapping("/courses/{id}/details")
     public String showOffer(@PathVariable Long id, Model model,
                             @AuthenticationPrincipal User user){
-        String authorAddress = offerRepository.findById(id).get().getAuthor().getHomeTown();
-        int size =  offerRepository.findById(id).get().getComments().size();
+        UserEntity author = offerRepository.findById(id).get().getAuthor();
+        String authorAddress = author.getHomeTown();
+        int commentCounter =  offerRepository.findById(id).get().getComments().size();
 
-
-        model.addAttribute("offer", offerService.findById(id, user.getUsername()));
-        model.addAttribute("commentCounter", size);
+        model.addAttribute("author", author);
+        model.addAttribute("offer", offerService.findOfferById(id, user.getUsername()));
+        model.addAttribute("commentCounter", commentCounter);
         model.addAttribute("authorAddress", authorAddress);
         return "course-details";
     }
 
     @GetMapping("/courses/all")
-    public String allOffers(Model model){
-        model.addAttribute("courses", offerService.getAllOffers());
+    public String allOffers(Model model, @AuthenticationPrincipal User user){
+        model.addAttribute("courses", offerService.getAllOffers(user.getUsername()));
         return "allcourses";
     }
 

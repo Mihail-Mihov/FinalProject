@@ -7,6 +7,7 @@ import com.example.myproject.model.view.ProfileDetailsView;
 import com.example.myproject.model.view.ProfileHomeView;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
 
@@ -20,7 +21,7 @@ public interface UserService {
 
      void updateProfile(ProfileUpdateBindingModel profile);
 
-     List<ProfileHomeView>  getAllUsers();
+     Set<ProfileHomeView> getAllUsers();
 
      UserEntity findById(Long id);
 
