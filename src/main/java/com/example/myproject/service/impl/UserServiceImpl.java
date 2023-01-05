@@ -43,8 +43,6 @@ public class UserServiceImpl implements UserService {
         this.modelMapper = modelMapper;
     }
 
-
-
     @Override
     public void initializeUsersAndRoles() {
         initializeRoles();
@@ -67,7 +65,6 @@ public class UserServiceImpl implements UserService {
             }
         }
         return list;
-
     }
 
     @Override
@@ -146,7 +143,6 @@ public class UserServiceImpl implements UserService {
          UserRoleEntity userRole = userRoleRepository.findByRole(UserRoleEnum.USER);
 
         UserEntity user = new UserEntity();
-
 
         user.setUsername(userRegistrationServiceModel.getUsername());
         user.setEmail(userRegistrationServiceModel.getEmail());

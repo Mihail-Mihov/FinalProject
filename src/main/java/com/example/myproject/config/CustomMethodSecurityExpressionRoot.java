@@ -18,10 +18,10 @@ public class CustomMethodSecurityExpressionRoot extends SecurityExpressionRoot
     }
 
 
-    public boolean isOwner(Long id) {
+    public boolean hasPrivileges(Long id) {
         String userName = currentUserName();
         if (userName != null) {
-            return offerService.isOwner(userName, id);
+            return offerService.hasPrivileges(userName, id);
         }
         return false;
     }

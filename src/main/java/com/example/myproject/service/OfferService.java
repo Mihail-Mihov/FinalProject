@@ -20,7 +20,7 @@ public interface OfferService {
 
     void deleteOffer(Long id);
 
-    boolean isOwner(String userName, Long id);
+    boolean hasPrivileges(String userName, Long id);
 
     void updateOffer(OfferUpdateServiceModel offerModel);
 

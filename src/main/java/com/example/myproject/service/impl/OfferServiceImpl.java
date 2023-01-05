@@ -60,27 +60,28 @@ public class OfferServiceImpl implements OfferService {
     public OfferDetailsView findById(Long id, String currentUser) {
         return this.offerRepository.
                 findById(id).
-                map(o -> mapDetailsView(currentUser, o))
+                map(o -> mapToDetailsView(currentUser, o))
                 .get();
 
     }
 
-    private OfferDetailsView mapDetailsView(String currentUser, OfferEntity offer) {
-        OfferDetailsView offerDetailsView = this.modelMapper.map(offer, OfferDetailsView.class);
+    private OfferDetailsView mapToDetailsView(String currentUser, OfferEntity offer) {
+       // OfferDetailsView offerDetailsView = this.modelMapper.map(offer, OfferDetailsView.class);
 
-        offerDetailsView.setId(offer.getId());
-        offerDetailsView.setCanDelete(isOwner(currentUser, offer.getId()));
-        offerDetailsView.setDescription(offer.getDescription());
-        offerDetailsView.setCategory(offer.getCategory());
-        offerDetailsView.setPrice(offer.getPrice());
-        offerDetailsView.setImageUrl(offer.getImageUrl());
-        offerDetailsView.setSellerFullName(offer.getAuthor().getFirstName() + " " + offer.getAuthor().getLastName());
-        return offerDetailsView;
+        return OfferDetailsView.builder()
+                .id(offer.getId())
+                .canDelete(hasPrivileges(currentUser, offer.getId()))
+                .description(offer.getDescription())
+                .category(offer.getCategory())
+                .price(offer.getPrice())
+                .imageUrl(offer.getImageUrl())
+                .sellerFullName(offer.getAuthor().getFirstName() + " " + offer.getAuthor().getLastName())
+                .build();
     }
 
-    public boolean isOwner(String userName, Long id) {
+    public boolean hasPrivileges(String userName, Long offerId) {
         Optional<OfferEntity> offer = offerRepository.
-                findById(id);
+                findById(offerId);
         Optional<UserEntity> user = userRepository.
                 findByUsername(userName);
 

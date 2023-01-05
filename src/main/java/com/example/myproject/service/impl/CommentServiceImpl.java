@@ -9,6 +9,7 @@ import com.example.myproject.repository.OfferRepository;
 import com.example.myproject.repository.UserRepository;
 import com.example.myproject.service.CommentService;
 import com.example.myproject.web.exception.ObjectNotFoundException;
+import lombok.Builder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,6 +25,7 @@ public class CommentServiceImpl implements CommentService {
     private final OfferRepository offerRepository;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public CommentServiceImpl(OfferRepository offerRepository, UserRepository userRepository, CommentRepository commentRepository) {
         this.offerRepository = offerRepository;
@@ -45,24 +47,21 @@ public class CommentServiceImpl implements CommentService {
                     .getComments()
                     .stream().map(this::mapAsComment)
                     .collect(Collectors.toList());
-
     }
 
     private CommentViewModel mapAsComment(CommentEntity comment){
-        CommentViewModel commentViewModel = new CommentViewModel();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String formatDateTime = now.format(formatter);
+        String formatDateTime = now.format(FORMATTER);
 
-        commentViewModel.setId(comment.getId());
-        commentViewModel.setCanApprove(true);
-        commentViewModel.setCanDelete(true);
-        commentViewModel.setCreated(formatDateTime);
-        commentViewModel.setComment(comment.getComment());
-        commentViewModel.setAuthor(comment.getAuthor().getUsername());
-
-        return commentViewModel;
+        return CommentViewModel.builder()
+                .id(comment.getId())
+                .canApprove(true)
+                .canDelete(true)
+                .created(formatDateTime)
+                .comment(comment.getComment())
+                .author(comment.getAuthor().getUsername())
+                .build();
     }
 
     @Override
@@ -74,16 +73,16 @@ public class CommentServiceImpl implements CommentService {
         var author = userRepository.findByUsername(commentServiceModel.getAuthor())
                 .orElseThrow(()-> new ObjectNotFoundException("Author with username " + commentServiceModel.getAuthor() + " is not found"));
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String formatDateTime = now.format(formatter);
+        String formatDateTime = now.format(FORMATTER);
 
-        CommentEntity comment = new CommentEntity();
-        comment.setCanApprove(false);
-        comment.setComment(commentServiceModel.getComment());
-        comment.setCreated(formatDateTime);
-        comment.setOffer(offer);
-        comment.setAuthor(author);
+        CommentEntity comment = CommentEntity.builder()
+                .canApprove(false)
+                .comment(commentServiceModel.getComment())
+                .created(formatDateTime)
+                .offer(offer)
+                .author(author)
+                .build();
 
         CommentEntity save = commentRepository.save(comment);
 

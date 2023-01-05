@@ -1,36 +1,28 @@
 #
 # -- user roles
-# INSERT INTO roles (id, role)
-# VALUES (1, 1);
-# INSERT INTO roles (id, role)
-# VALUES (2, 1);
-# INSERT INTO roles (id, role)
-# VALUES (3, 1);
+--INSERT INTO roles (id, role)
+--VALUES (1, 1);
+--INSERT INTO roles (id, role)
+--VALUES (2, 1);
+--INSERT INTO roles (id, role)
+--VALUES (3, 1);
 
 -- some test users
 INSERT INTO users (id, active, description, email, first_name, home_town , last_name, number, password, username)
-VALUES (1, true, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer' ,
-        'admin@admin.com', 'Kalin', 'Sofia' ,'Kirevski','0896369845' , '14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa319cbb6565
-f648ccf0e11c57648b79ca', 'kmkalin');
+VALUES (1, true, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer' ,
+        'admin@admin.com', 'Kalin', 'Sofia' ,'Kirevski','0896369845' , '14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa319cbb6565f648ccf0e11c57648b79ca', 'kmkalin');
 
 INSERT INTO users (id, active, description,email, first_name, home_town ,last_name, number,password, username)
-VALUES (2, true, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer'
- , 'valio@admin.com', 'Valentin','Pernik' , 'Simeonov', '0896369845','14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa
-319cbb6565f648ccf0e11c57648b79ca',  'svalio');
+VALUES (2, true, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer'
+ , 'valio@admin.com', 'Valentin','Pernik' , 'Simeonov', '0896369845','14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa319cbb6565f648ccf0e11c57648b79ca',  'svalio');
 
 INSERT INTO users (id, active, description, email, first_name, home_town,last_name, number, password, username)
-VALUES (3, true,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer'
- , 'misho@admin.com', 'Mihail', 'Gabrovo' , 'Mihov', '0896369845', '14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa
-319cbb6565f648ccf0e11c57648b79ca', 'mbmihail');
+VALUES (3, true,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer'
+ , 'misho@admin.com', 'Mihail', 'Gabrovo' , 'Mihov', '0896369845', '14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa319cbb6565f648ccf0e11c57648b79ca', 'mbmihail');
 
 INSERT INTO users (id, active, description, email, first_name, home_town, last_name, number, password, username)
-VALUES (4, true, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer'
-, 'rosen@admin.com', 'Rosen','Teteven' , 'Rusecv', '0896369845' ,'14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa31
-9cbb6565f648ccf0e11c57648b79ca',  'rrosen');
+VALUES (4, true, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer'
+, 'rosen@admin.com', 'Rosen','Teteven' , 'Rusecv', '0896369845' ,'14a8a58be046ccab8d333bf1f3e519306381ca45db2fbbaa319cbb6565f648ccf0e11c57648b79ca',  'rrosen');
 -- user roles
 -- admin
 INSERT INTO users_roles (`user_entity_id`, `roles_id`)

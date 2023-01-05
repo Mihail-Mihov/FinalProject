@@ -1,13 +1,23 @@
 package com.example.myproject.model.entity;
 
+import lombok.*;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 public abstract  class BaseEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
@@ -15,8 +25,6 @@ public abstract  class BaseEntity {
 //
 //    private Instant modified;
 
-    public BaseEntity() {
-    }
 
 //    @Column(nullable = false)
 //    public Instant getCreated() {
@@ -34,14 +42,4 @@ public abstract  class BaseEntity {
 //    public void setModified(Instant modified) {
 //        this.modified = modified;
 //    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
