@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head >
+<head>
     <meta charset="utf-8">
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <title>Course Details Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>Course Details</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/css/reset-css.css"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/style.css"/>
-    <link rel="stylesheet" href="/css/course-details.css"/>
+        <link rel="stylesheet" href="/css/course-details.css"/>
 </head>
 
 
@@ -56,24 +56,67 @@
 
                     </p>
                     <div class="product_meta">
-                        <span class="posted_in"> <strong>Categories:</strong> </span><small class="text-danger"  th:text="*{category}" rel="tag" href="#" >T-shirt</small>
-
+                        <span> <strong>Category: </strong>
+                        <small class="text-danger"  th:text="*{category}" rel="tag" th:href="@{/courses/all}">Category</small>
+                        </span>
                     </div>
-                    <div class="product_meta">
-                        <span class="posted_in"> <strong>Address:</strong> </span><small class="text-danger"  th:text="${authorAddress}" rel="tag" href="#" >T-shirt</small>
-
+                        <div class="product_meta">
+                            <span> <strong>Address: </strong>
+                              <small class="text-danger"  th:text="${authorAddress}" rel="tag" href="#">Address</small>
+                            </span>
+                        </div>
+                    <div class="m-bot15">
+                        <strong>Price : </strong>
+<!--                        <span th:text="*{price + 50  + 'лв'}" class="amount-old">$544</span>-->
+                        <span th:text="*{price + 'лв'}" class="pro-price"> $300.00</span>
                     </div>
-                    <div class="m-bot15"> <strong>Price : </strong> <span th:text="*{price + 50  + 'лв'}" class="amount-old">$544</span>  <span th:text="*{price + 'лв'}" class="pro-price"> $300.00</span></div>
+                    <th:block th:object="${author}">
+                    <div class="product_meta" >
+                        <span class="posted_in"> <strong>Seller:</strong>
+                        <small th:href="@{/users/{1}/details}" class="text-danger"  th:text="*{username}" rel="tag" >Author Name</small>
+                            </span>
+                    </div>
                     <p>
-                        <button class="btn btn-round btn-danger" type="button"><i class="fa"></i> Concact Seller</button>
+
+                    <p>
+                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                           aria-expanded="false" aria-controls="collapseExample">
+                            Contact Seller
+                        </a>
+                    </p>
+                    <div class="collapse dropdown" id="collapseExample">
+                        <div class="card card-body" th:text="*{email}">
+                            qweqweqweqwe
+                        </div>
+                    </div>
+                    </th:block>
 
 
-                    <form th:if="*{canDelete}" th:action="@{/courses/{id}(id=*{id})}" th:method="delete">
-                        <input type="submit" class="btn btn-round btn-danger fa fa-shopping-cart" value="Delete"/>
-                    </form>
 
-                    <a th:if="*{canDelete}" class="btn btn-round btn-danger fa"
-                        th:href="@{/courses/{id}/edit(id=*{id})}">Update</a>
+                    <div class="panel-footer row"><!-- panel-footer -->
+                        <div class="col-xs-6 text-left">
+                            <div class="previous">
+                                <form th:if="*{canDelete}" th:action="@{/courses/{id}(id=*{id})}" th:method="delete">
+                                    <input type="submit" class="btn btn-round btn-danger fa fa-shopping-cart" value="Delete"/>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <div class="next">
+                                <a th:if="*{canDelete}" class="btn btn-round btn-danger fa"
+                                   th:href="@{/courses/{id}/edit(id=*{id})}">Update</a>
+                            </div>
+                        </div>
+                    </div><!-- end panel-footer -->
+
+
+
+
+
+                    <
+
+
+
 
                     </p>
                 </div>
@@ -108,17 +151,10 @@
                                 </form>
 
                                 <h3 th:text="${commentCounter + 'Comments'}"></h3>
-
-
-
                                 <div>
 
                                     <span id="commentCtnr"><!-- Comments section, filled in by script --></span>
                                 </div>
-
-
-
-
                             </div>
                         </div>
                     </div>
@@ -126,9 +162,6 @@
 
             </div>
         </section>
-
-        <script th:src="@{/scripts/myscript.js}"></script>
-
     </div>
 </div>
 

@@ -52,7 +52,7 @@ public class OfferServiceImpl implements OfferService {
         return offerRepository.
                 findAllOffers().
                 stream().
-                map(o -> mapToDetailsView(currentUser, o)).
+                map(o -> mapToDetailsView(null, o)).
                 collect(Collectors.toList());
     }
 

@@ -134,8 +134,8 @@ public class CourseController {
     }
 
     @GetMapping("/courses/all")
-    public String allOffers(Model model, @AuthenticationPrincipal User user){
-        model.addAttribute("courses", offerService.getAllOffers(user.getUsername()));
+    public String allOffers(Model model, String username){
+        model.addAttribute("courses", offerService.getAllOffers(null));
         return "allcourses";
     }
 
